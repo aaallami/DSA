@@ -1,3 +1,3 @@
 # DSA
-This is a new DSA using Python work
+This is a new DSA using Python
 
