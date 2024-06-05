@@ -33,7 +33,12 @@ def traver_post_order(node):
         return []
     return(traver_post_order(node.right)+[node.key]+traver_post_order(node.left))
 
-
+def tree_hight(node):
+    if node is None:
+        return 0
+    return 1+ max(tree_hight(node.left), tree_hight(node.right))
+        
+    
 node0=TreeNode(3)
 node1=TreeNode(4)
 node2=TreeNode(5)
@@ -53,5 +58,5 @@ print(f"tree, {tree.key}")
 print(f'travers in order= {traver_in_order(tree)}')
 print(f'travers per order= {traver_pre_order(tree)}')
 print(f'travers post order= {traver_post_order(tree)}')
-
+print(f"tree hight ={tree_hight(tree)}")
 tree_view(tree, '     ', 0)
