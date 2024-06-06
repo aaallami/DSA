@@ -4,40 +4,45 @@ class TreeNode:
         self.left=None
         self.right=None
 
-def tree_view(node, space, level):
-    # if node is empty
-    if node is None:
-        print(space *level+'@')
-        return
-    #if the node is a leaf
-    if node.left is None and node.right is None:
-        print(space*level+str(node.key))
-        return
-    #if the node is a child
-    tree_view(node.right, space, level+1)
-    print(space*level+str(node.key))
-    tree_view(node.left, space, level+1)
+    def tree_view(self, space='\t', level=0):
+        # if node is empty
+        if self is None:
+            print(space *level+'@')
+            return
+        #if the node is a leaf
+        if self.left is None and self.right is None:
+            print(space*level+str(self.key))
+            return
+        #if the node is a child
+        TreeNode.tree_view(self.right, space, level+1)
+        print(space*level+str(self.key))
+        TreeNode.tree_view(self.left, space, level+1)
 
-def traver_in_order(node):
-    if node is None:
-        return []
-    return(traver_in_order(node.left)+[node.key]+traver_in_order(node.right))
+    def traver_in_order(self):
+        if self is None:
+            return []
+        return(TreeNode.traver_in_order(self.left)+[self.key]+TreeNode.traver_in_order(self.right))
 
-def traver_pre_order(node):
-    if node is None:
-        return []
-    return([node.key]+traver_pre_order(node.left)+traver_pre_order(node.right))
+    def traver_pre_order(self):
+        if self is None:
+            return []
+        return([self.key]+TreeNode.traver_pre_order(self.left)+TreeNode.traver_pre_order(self.right))
 
-def traver_post_order(node):
-    if node is None:
-        return []
-    return(traver_post_order(node.right)+[node.key]+traver_post_order(node.left))
+    def traver_post_order(self):
+        if self is None:
+            return []
+        return(TreeNode.traver_post_order(self.right)+[self.key]+TreeNode.traver_post_order(self.left))
 
-def tree_hight(node):
-    if node is None:
-        return 0
-    return 1+ max(tree_hight(node.left), tree_hight(node.right))
-        
+    def tree_hight(self):
+        if self is None:
+            return 0
+        return 1+ max(TreeNode.tree_hight(self.left), TreeNode.tree_hight(self.right))
+    def to_tuple(self):
+        if self is None:
+            return None
+        if self.left is None and self.right is None:
+            return self.key
+        return TreeNode.to_tuple(self.left), self.key, TreeNode.to_tuple(self.right)
     
 node0=TreeNode(3)
 node1=TreeNode(4)
@@ -55,8 +60,9 @@ node1.left=node3
 node2.right=node6
 tree =node0
 print(f"tree, {tree.key}")
-print(f'travers in order= {traver_in_order(tree)}')
-print(f'travers per order= {traver_pre_order(tree)}')
-print(f'travers post order= {traver_post_order(tree)}')
-print(f"tree hight ={tree_hight(tree)}")
-tree_view(tree, '     ', 0)
+print(f'travers in order= {tree.tree_view()}')
+print(f'travers in order= {tree.traver_in_order()}')
+print(f'travers per order= {tree.traver_pre_order()}')
+print(f'travers post order= {tree.traver_post_order()}')
+print(f"tree hight ={tree.tree_hight()}")
+
